@@ -65,11 +65,11 @@ There are two steps to find the number of clusters (k\*) using the ‘elbow’ m
 
 **Step 1.** Perform m clusterings to decides the range k\* falls into. In the first clustering, k = 1; in each of the subsequent clusterings, k is doubled. Stop at k = 2v when there is little change in the cohesion from k = v to k = 2v. In this project, we define ‘little change’ to be less than a given percentage (as an input argument) of change in cohesion (i.e., decrease in average diameter of clusters) comparing to the cohesion at the previous k.
 
-Formally, stop at k = 2v when the normalized rate of change in cohesion, denoted as r, where r = |c(v) - c(2v)|/(c(v) \* v), is less than a threshold θ. Note that c(k) is the cohesion of the clustering of data sets with k clusters. The threshold will be one of the input to the algorithm.
+Formally, stop at k = 2v when the normalized rate of change in cohesion, denoted as r, where <img src="https://latex.codecogs.com/gif.latex?%5Clarge%20r%20%3D%20%5Cfrac%7B%7Cc%28v%29%20-%20c%282v%29%7C%7D%7B%28c%28v%29%20%5Ccdot%20v%29%7D"/> , is less than a threshold θ. Note that c(k) is the cohesion of the clustering of data sets with k clusters. The threshold will be one of the input to the algorithm.
 
 Note that it is possible than 2v is greater than the total number of points, denoted as n. In this case, *just output k* = n.\*
 
-**Step 2.** Perform a binary search for k\* among the range \[v/2, v\]. Consider the current range \[x, y\], with midpoint z. If there is little change in the cohesion between z and y, then narrow the search to \[x, z\]. Otherwise, continue the search on \[z, y\]. Here to determine if the change is little, use the same normalized rate as in step 1. That is, r = |c(z) - c(y)|/(c(z) \* |z-y|). If r is less than θ, we determine that the change is little.
+**Step 2.** Perform a binary search for k\* among the range \[v/2, v\]. Consider the current range \[x, y\], with midpoint z. If there is little change in the cohesion between z and y, then narrow the search to \[x, z\]. Otherwise, continue the search on \[z, y\]. Here to determine if the change is little, use the same normalized rate as in step 1. That is, <img src="https://latex.codecogs.com/gif.latex?%5Clarge%20r%20%3D%20%5Cfrac%7B%7Cc%28z%29%20-%20c%28y%29%7C%7D%7B%28c%28z%29%20%5Ccdot%20%7Cz-y%7C%29%7D"/> . If r is less than θ, we determine that the change is little.
 
 Note that when the search is narrowed to \[x, y\] where y = x + 1. Output k = x or y, whichever gives the highest cohesion (i.e., lowest average diameter of clusters).
 
